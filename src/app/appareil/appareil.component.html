@@ -1,0 +1,17 @@
+<ul>
+    <li class="list">
+        <div class="badge badge-primary badge-pill" [ngStyle]="{color: getColor()}">Appareil: {{ appareilName }} est {{
+            getStatus() }} status Color:
+            <!-- <div
+                [ngClass]="{status: true, status_eteint: appareilStatus == 'éteint', status_allume: appareilStatus == 'allumé'}">
+            </div> -->
+            <button class="btn btn-success" (click)="switchOn()"
+                [disabled]="appareilStatus == 'allumé'">Allumer</button>
+            <button class="btn btn-danger" (click)="switchOff()"
+                [disabled]="appareilStatus == 'éteint'">Eteindre</button>
+            <a routerLink="/appareils/{{ appareilName }}">info</a>
+
+        </div>
+    </li>
+</ul>
+<input type="text" [(ngModel)]="appareilName" class="input">

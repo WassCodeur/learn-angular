@@ -1,0 +1,24 @@
+.list {
+    list-style: none;
+}
+
+.input {
+    margin-left: 3%;
+}
+
+.status {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+
+    margin-left: 3px;
+
+}
+
+.status_allume {
+    background-color: green;
+}
+
+.status_eteint {
+    background-color: brown;
+}

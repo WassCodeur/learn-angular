@@ -1,0 +1,7 @@
+.btn_submit {
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(91, 191, 91);
+    margin-left: 7%;
+    cursor: pointer;
+}
