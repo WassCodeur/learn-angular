@@ -1,5 +1,10 @@
+import { Subject } from 'rxjs'
+
 export class AppareilService {
-    appareils = [
+    //ajouter un l'obser subject : qui emet un evenement et de choisir le type de l'evenement
+    appareilSubject = new Subject<any[]>()
+    //abstraction de la logique de l'application
+    private appareils = [
         {
             id: 1,
             name: 'Asus',
@@ -16,15 +21,21 @@ export class AppareilService {
             status: 'allumé'
         },
     ];
+    //emettre la liste des appareil
+
+    emetappareilSubject() {
+        this.appareilSubject.next(this.appareils.slice());
+    }
     //utiliser l'id pour afficher l'appareil
-    // getAppareilById(id: number) {
-    //     const appareil = this.appareils.find(
-    //         (appareilObject) => {
-    //             return appareilObject.id === id;
-    //         }
-    //     );
-    //     return appareil;
-    // }
+    getAppareilById(id: number) {
+        const appareil = this.appareils.find(
+            (appareilObject) => {
+                return appareilObject.id === id;
+            }
+        );
+
+        return appareil;
+    }
 
     //utiliser le nom pour afficher l'appareil
     getAppareilByName(name: string) {
@@ -33,6 +44,7 @@ export class AppareilService {
                 return appareilObject.name === name;
             }
         );
+
         return appareil;
     }
 
@@ -41,17 +53,22 @@ export class AppareilService {
         for (let appareil of this.appareils) {
             appareil.status = 'allumé';
         }
+        this.emetappareilSubject();
+
     }
     switchOffAll() {
         for (let appareil of this.appareils) {
             appareil.status = 'éteint';
         }
+        this.emetappareilSubject();
     }
     switchOnOne(index: number) {
         this.appareils[index].status = 'allumé';
+        this.emetappareilSubject();
     }
     switchOffOne(index: number) {
         this.appareils[index].status = 'éteint';
+        this.emetappareilSubject();
     }
 
 }
