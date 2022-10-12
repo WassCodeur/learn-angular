@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AppareilService } from '../services/appareil.service';
 import { Subscription } from 'rxjs';
+import { interval } from 'rxjs'; //importer interval
 @Component({
   selector: 'app-appareil-view',
   templateUrl: './appareil-view.component.html',
   styleUrls: ['./appareil-view.component.css']
 })
-export class AppareilViewComponent implements OnInit {
+export class AppareilViewComponent implements OnInit, OnDestroy {
 
   updateAt = new Promise(
     (resolve, reject) => {
@@ -23,6 +24,8 @@ export class AppareilViewComponent implements OnInit {
 
   appareils?: any[];
   appareilSubcription?: Subscription;
+  secondes?: number;
+  counterSubscription?: Subscription;
 
   constructor(private appareilService: AppareilService) {
 
@@ -34,7 +37,26 @@ export class AppareilViewComponent implements OnInit {
       }
     );
     this.appareilService.emetappareilSubject();
+    //observable qui emet une valeur toutes les 1000ms
+    const myObservable = interval(1000);
+    this.counterSubscription = myObservable.subscribe((integer) => {
+      console.log(integer);
+      this.secondes = integer;
+    },
+      (error: any) => {
+        console.log('error');
 
+      },
+      () => {
+        console.log('complete');
+
+      }
+    );
+
+  }
+  //on detruit l'observable
+  ngOnDestroy() {
+    this.counterSubscription?.unsubscribe();
   }
   onAllume() {
     this.appareilService.switchOnAll();

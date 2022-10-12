@@ -14,7 +14,7 @@ import { AppareilService } from './services/appareil.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit /*, OnDestroy*/ {
   secondes?: number;
   counterSubscription?: Subscription;
   constructor() {
@@ -24,20 +24,20 @@ export class AppComponent implements OnInit, OnDestroy {
 
     //observable qui emet une valeur toutes les 1000ms
 
-    const myObservable = interval(1000);
-    this.counterSubscription = myObservable.subscribe((integer) => {
-      console.log(integer);
-      this.secondes = integer;
-    },
-      (error: any) => {
-        console.log('error');
+    // const myObservable = interval(1000);
+    // this.counterSubscription = myObservable.subscribe((integer) => {
+    //   console.log(integer);
+    //   this.secondes = integer;
+    // },
+    //   (error: any) => {
+    //     console.log('error');
 
-      },
-      () => {
-        console.log('complete');
+    //   },
+    //   () => {
+    //     console.log('complete');
 
-      }
-    );
+    //   }
+    // );
 
 
 
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   }
   //on detruit l'observable
-  ngOnDestroy() {
-    this.counterSubscription?.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.counterSubscription?.unsubscribe();
+  // }
 }
