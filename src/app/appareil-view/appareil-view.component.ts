@@ -40,7 +40,6 @@ export class AppareilViewComponent implements OnInit, OnDestroy {
     //observable qui emet une valeur toutes les 1000ms
     const myObservable = interval(1000);
     this.counterSubscription = myObservable.subscribe((integer) => {
-      console.log(integer);
       this.secondes = integer;
     },
       (error: any) => {
